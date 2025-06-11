@@ -10,5 +10,4 @@
 [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)<br>
 ![](https://img.shields.io/github/stars/Rikiub/spotdl-syncer?style=social)
 
-
 </div>
