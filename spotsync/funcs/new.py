@@ -1,50 +1,56 @@
 from pathlib import Path
 
-from utils.spotdl import spotDLSyncer, getSpotifyClient, check_spotify_url, SpotifyException, ConnectionError
-from utils.extractors import extract_local_playlist_name
+from spotsync.utils.spotdl import (
+    ConnectionError,
+    check_spotify_url,
+    getSpotifyClient,
+    spotDLSyncer,
+)
+from spotsync.utils.theme import print
 
-from utils.theme import print, input
 
-def New(url: str, output_path: Path, target_file: str):
-	"""
-	Create a new playlist
-	"""
+def New(url: list[str], output_path: Path, target_file: str):
+    """
+    Create a new playlist
+    """
 
-	try:
-		# check Spotify URLs
-		for url_item in url:
-			if check_spotify_url(url_item):
-				pass
+    playlist_path = ""
 
-		sp = getSpotifyClient()
+    try:
+        # check Spotify URLs
+        for url_item in url:
+            if check_spotify_url(url_item):
+                pass
 
-		# loop to process the URLs
-		counter = len(url)
-		for url_item in url:
-			print(f'\n[low]-> [enumerate]{counter}[/]')
+        sp = getSpotifyClient()
 
-			# declare the paths
-			playlist_data = sp.playlist(url_item)
-			playlist_path = output_path / playlist_data["name"]
+        # loop to process the URLs
+        counter = len(url)
+        for url_item in url:
+            print(f"\n[low]-> [enumerate]{counter}[/]")
 
-			# create playlist dir
-			playlist_path.mkdir(parents=True, exist_ok=True)
+            # declare the paths
+            playlist_data = sp.playlist(url_item)
+            playlist_path = output_path / playlist_data["name"]  # type: ignore
 
-			# if playlist dir is not empty, error got
-			if any(playlist_path.iterdir()):
-				raise FileExistsError
+            # create playlist dir
+            playlist_path.mkdir(parents=True, exist_ok=True)
 
-			# spotdl process
-			spotDLSyncer(
-				query=url_item,
-				output_path=playlist_path,
-				save_file=target_file
-			)
-			counter -= 1
+            # if playlist dir is not empty, error got
+            if any(playlist_path.iterdir()):
+                raise FileExistsError
 
-		print("[success]Sync successful")
+            # spotdl process
+            spotDLSyncer(
+                query=url_item, output_path=playlist_path, save_file=target_file
+            )
+            counter -= 1
 
-	except FileExistsError:
-		print(f'[warning]The directory [object]"{playlist_path}"[/] already exists and is not empty. Please change the name in the remote Spotify Playlist or delete the duplicated folder')
-	except (ValueError, KeyboardInterrupt, ConnectionError):
-		pass
+        print("[success]Sync successful")
+
+    except FileExistsError:
+        print(
+            f'[warning]The directory [object]"{playlist_path}"[/] already exists and is not empty. Please change the name in the remote Spotify Playlist or delete the duplicated folder'
+        )
+    except (ValueError, KeyboardInterrupt, ConnectionError):
+        pass

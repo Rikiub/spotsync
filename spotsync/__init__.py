@@ -1,4 +1,4 @@
-from utils.arguments import parseArguments, OPERATIONS
+from spotsync.utils.arguments import OPERATIONS, parseArguments
 
 
 def run_cli():

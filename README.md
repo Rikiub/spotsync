@@ -8,12 +8,6 @@
 [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)<br>
 ![](https://img.shields.io/github/stars/Rikiub/spotdl-syncer?style=social)
 
+> Powered by [spotDL](https://github.com/spotDL/spotify-downloader)
+
 </div>
-
-## Dependencies
-
-- Python 3.8
-	- [spotDL](https://github.com/spotDL/spotify-downloader)
-	- [Rich (Included with spotDL)](https://pypi.org/project/rich/)
-
-## Installation
