@@ -1,6 +1,6 @@
 [project]
 name = "spotsync"
-version = "0.1.0"
+version = "3.0.0"
 description = "A extension of SpotDL to create and sync Spotify playlists"
 readme = "README.md"
 authors = [
