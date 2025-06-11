@@ -1,18 +1,20 @@
-[tool.poetry]
+[project]
 name = "spotsync"
 version = "0.1.0"
-description = "A extension of SpotDL to create and sync Spotify Playlist"
-authors = ["Rikiub <rikiub.dev@gmail.com>"]
-license = "MIT"
+description = "A extension of SpotDL to create and sync Spotify playlists"
 readme = "README.md"
-repository = "https://github.com/Rikiub/spot-sync"
-keywords = ["music", "downloader", "spotdl", "spotify"]
+authors = [
+    { name = "Rikiub", email = "rikiub.dev@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "spotdl>=4.2.0",
+    "rich>=13.4.2"
+]
 
-[tool.poetry.dependencies]
-python = ">=3.7.2, <3.12"
-spotdl = "^4.2.0"
-rich = "^13.4.2"
+[project.scripts]
+spotsync = "spotsync:run_cli"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

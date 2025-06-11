@@ -1,13 +1,3 @@
-from utils.arguments import parseArguments, OPERATIONS
+import spotsync
 
-if __name__ == '__main__':
-	TARGET_FILE = ".spotdl"
-
-	# start CLI
-	args = parseArguments()
-
-	OPERATIONS[args.operation] (
-		args.query,
-		args.output,
-		TARGET_FILE
-	)
+spotsync.run_cli()
